@@ -1,0 +1,45 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Runner' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Runner
+
+end
+
+target 'watch' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for watch
+
+  target 'watchTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'watchUITests' do
+    # Pods for testing
+  end
+
+end
+
+target 'watch WatchKit Extension' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for watch WatchKit Extension
+
+end
+
+post_installer do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64 i386'
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+    end
+  end
+end
